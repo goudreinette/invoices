@@ -7,8 +7,6 @@ Invoice.for_client 'Hans van der Woerd' do
   postcode "8011VC"
   city     "Zwolle"
   items    'Add To Cart' => 150,
-           'WooEvents'   => 450,
-           'Third'       => 200
-
+  				 'WooEvents'   => 450 
   puts self
 end.to_pdf

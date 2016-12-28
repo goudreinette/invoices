@@ -1,4 +1,4 @@
-require "prawn"
+require "./template"
 
 class Invoice
   def self.for_client(client, &block)
@@ -57,30 +57,11 @@ class Invoice
     self
   end
 
-  def to_pdf
-    file = "Invoice #{no}.pdf"
-    puts "Saving to '#{file}'..."
-
-    Prawn::Document.generate file do |pdf|
-      pdf.font_size 9
-
-      # items
-      @items.keys.each_with_index do |item, index|
-        pdf.text_box item,              width: 100, height: 100, at: [100, 400 - index * 50]
-        pdf.text_box @items[item].to_s, width: 100, height: 100, at: [400, 400 - index * 50]
-      end
-
-      pdf.text_box to,                  width: 300, height: 100, at: [50, 600]
-      pdf.text_box no,                  width: 300, height: 100, at: [200, 500], size: 12
-      pdf.text_box date,                width: 300, height: 100, at: [100, 450]
-      pdf.text_box reference,           width: 300, height: 100, at: [250, 450]
-      pdf.text_box client,              width: 300, height: 100, at: [400, 450]
-      pdf.text_box format_money(btw),   width: 100, height: 100, at: [100, 250]
-      pdf.text_box format_money(total), width: 100, height: 100, at: [400, 250], size: 14
-    end
-  end
-
   def to_s
     "<Invoice #{no}, client: #{client}, total: #{total}>"
+  end
+
+  def to_pdf(template = DefaultTemplate)
+    DefaultTemplate.render_to_pdf(self)
   end
 end
