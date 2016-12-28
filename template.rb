@@ -37,12 +37,13 @@ class DefaultTemplate < Template
       pdf.text_box invoice.items[item].to_s, width: 100, height: 100, at: [400, 400 - index * 50]
     end
 
-    pdf.text_box invoice.to,                  				width: 300, height: 100, at: [50, 600]
-    pdf.text_box invoice.no,                  				width: 300, height: 100, at: [200, 500], size: 12
-    pdf.text_box invoice.date,                				width: 300, height: 100, at: [100, 450]
-    pdf.text_box invoice.reference,           				width: 300, height: 100, at: [250, 450]
-    pdf.text_box invoice.client,              				width: 300, height: 100, at: [400, 450]
-    pdf.text_box invoice.format_money(invoice.btw),   width: 100, height: 100, at: [100, 250]
-    pdf.text_box invoice.format_money(invoice.total), width: 100, height: 100, at: [360, 250], size: 18
+    pdf.text_box invoice.to,                  					 width: 300, height: 100, at: [50, 600]
+    pdf.text_box invoice.no,                  					 width: 300, height: 100, at: [200, 500], size: 12
+    pdf.text_box invoice.date,                					 width: 300, height: 100, at: [100, 450]
+    pdf.text_box invoice.reference,           					 width: 300, height: 100, at: [250, 450]
+    pdf.text_box invoice.client,              					 width: 300, height: 100, at: [400, 450]
+    pdf.text_box invoice.format_money(invoice.btw),   	 width: 100, height: 100, at: [150, 250]
+    pdf.text_box invoice.format_money(invoice.subtotal), width: 100, height: 100, at: [100, 250]
+    pdf.text_box invoice.format_money(invoice.total),  	 width: 100, height: 100, at: [360, 250], size: 18
 	end
 end
