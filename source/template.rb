@@ -63,7 +63,7 @@ class DefaultTemplate < Template
       text pdf, format_money(invoice.items[item]), at: [450, 360 + index * 56]
     end
 
-    text pdf, invoice.to,                  					  at: [85, 121], leading: 3
+    text pdf, invoice.to,                  					  at: [85, 121], leading: 4
     text pdf, invoice.no,                  					  at: [168, 247], size: 12
     text pdf, invoice.date,                					  at: [85.5, 292]
     text pdf, invoice.reference,           					  at: [276, 292]
