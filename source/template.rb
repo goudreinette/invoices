@@ -36,6 +36,10 @@ class Template
   def self.format_money(number)
     "€ %.2f" % number
   end
+
+  def self.fonts_path
+    "fonts/#{path}"
+  end
 end
 
 class DefaultTemplate < Template
@@ -45,15 +49,22 @@ class DefaultTemplate < Template
 
   def self.render(invoice, pdf)
     pdf.font_size 9
-    # Register font here
+    pdf.font_families.update 'SourceSans' => {
+      :normal => "#{fonts_path}/SourceSansPro.ttf",
+      :italic => "#{fonts_path}/SourceSansPro-It.ttf",
+      :bold => "#{fonts_path}/SourceSansPro-Semibold.ttf",
+      :bold_italic => "#{fonts_path}/SourceSansPro-SemiboldIt.ttf"
+    }
+
+    pdf.font "SourceSans"
 
     # items
     invoice.items.keys.each_with_index do |item, index|
-      text pdf, item,              			           at: [90, 360 + index * 56]
+      text pdf, item,              			           at: [90, 360 + index * 56], style: :bold
       text pdf, format_money(invoice.items[item]), at: [450, 360 + index * 56]
     end
 
-    text pdf, invoice.to,                  					  at: [85, 121]
+    text pdf, invoice.to,                  					  at: [85, 121], leading: 3
     text pdf, invoice.no,                  					  at: [168, 247], size: 12
     text pdf, invoice.date,                					  at: [85.5, 292]
     text pdf, invoice.reference,           					  at: [276, 292]
