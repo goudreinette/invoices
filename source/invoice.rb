@@ -1,4 +1,4 @@
-require "./template"
+require_relative "template"
 
 class Invoice
   def self.for_client(client, &block)
