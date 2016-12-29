@@ -2,34 +2,36 @@ require "prawn"
 require "combine_pdf"
 
 class Template
-	def self.render_to_pdf(invoice)
-		file = "Invoice #{invoice.no}.pdf"
+  def self.render_to_pdf(invoice)
+    file = "Invoice #{invoice.no}.pdf"
     puts "Saving to '#{file}'..."
 
     Prawn::Document.generate file do |pdf|
-    	render(invoice, pdf)
+      render(invoice, pdf)
     end
 
     combine(file)
-	end
+  end
 
-	def self.combine(file)
-    template = CombinePDF.load("templates/default.pdf")
+  def self.combine(file)
+    template = CombinePDF.load("templates/#{path}.pdf")
     rendered = CombinePDF.load(file)
 
     template.pages.zip(rendered.pages) do |t, r|
-	    t << r
+      t << r
     end
 
-		template.save file
-	end
+    template.save file
+  end
 end
 
 class DefaultTemplate < Template
-	path = "default"
+  def self.path
+    'default'
+  end
 
-	def self.render(invoice, pdf)
-		pdf.font_size 9
+  def self.render(invoice, pdf)
+    pdf.font_size 9
 
     # items
     invoice.items.keys.each_with_index do |item, index|
@@ -45,5 +47,5 @@ class DefaultTemplate < Template
     pdf.text_box invoice.format_money(invoice.btw),   	 width: 100, height: 100, at: [150, 250]
     pdf.text_box invoice.format_money(invoice.subtotal), width: 100, height: 100, at: [100, 250]
     pdf.text_box invoice.format_money(invoice.total),  	 width: 100, height: 100, at: [360, 250], size: 18
-	end
+  end
 end

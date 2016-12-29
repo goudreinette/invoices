@@ -62,6 +62,6 @@ class Invoice
   end
 
   def to_pdf(template = DefaultTemplate)
-    DefaultTemplate.render_to_pdf(self)
+    template.render_to_pdf(self)
   end
 end
