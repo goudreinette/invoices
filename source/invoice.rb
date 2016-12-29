@@ -33,7 +33,7 @@ class Invoice
   end
 
   def subtotal
-    @items.values.inject(:+)
+    @items.values.inject 0, :+
   end
 
   def tax
@@ -46,10 +46,6 @@ class Invoice
 
   def to
     "#{client},\n#{full_address}"
-  end
-
-  def format_money(number)
-     "%.2f" % number
   end
 
   def and_then
