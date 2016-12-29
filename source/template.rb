@@ -69,7 +69,7 @@ class DefaultTemplate < Template
     text pdf, invoice.reference,           					  at: [276, 292]
     text pdf, invoice.client,              					  at: [414, 292]
     text pdf, format_money(invoice.subtotal),         at: [90, 550]
-    text pdf, format_money(invoice.btw),   	          at: [159, 550]
+    text pdf, format_money(invoice.tax), at: [159, 550]
     text pdf, format_money(invoice.total),            at: [385, 538], size: 18
   end
 end

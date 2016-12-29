@@ -36,12 +36,12 @@ class Invoice
     @items.values.inject(:+)
   end
 
-  def btw
+  def tax
     subtotal * 0.21
   end
 
   def total
-    subtotal + btw
+    subtotal + tax
   end
 
   def to
