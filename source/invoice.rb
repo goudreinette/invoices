@@ -1,7 +1,7 @@
 require_relative "template"
 
 class Invoice
-  def self.for_client(client, &block)
+  def self.new_for_client(client, &block)
     invoice = self.new(client)
     invoice.instance_eval(&block)
     invoice
