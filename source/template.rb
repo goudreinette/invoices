@@ -6,7 +6,6 @@ class Template
     file = "Invoice #{invoice.no}.pdf"
     puts "Saving to '#{file}'..."
 
-    Prawn::Font::AFM.hide_m17n_warning = true
     Prawn::Document.generate file do |pdf|
       render(invoice, pdf)
     end
@@ -25,6 +24,16 @@ class Template
     template.save file
   end
 
+  def self.fonts_path
+    "fonts/#{path}"
+  end
+end
+
+class DefaultTemplate < Template
+  def self.path
+    'default'
+  end
+  
   def self.text(pdf, text, options = {})
     x = -36 + options[:at][0]
     y = 805 - options[:at][1]
@@ -35,16 +44,6 @@ class Template
 
   def self.format_money(number)
     "€ %.2f" % number
-  end
-
-  def self.fonts_path
-    "fonts/#{path}"
-  end
-end
-
-class DefaultTemplate < Template
-  def self.path
-    'default'
   end
 
   def self.render(invoice, pdf)
