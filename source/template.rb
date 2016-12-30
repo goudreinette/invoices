@@ -49,9 +49,9 @@ class DefaultTemplate < Template
   def self.render(invoice, pdf)
     pdf.font_size 9
     pdf.font_families.update 'SourceSans' => {
-      :normal => "#{fonts_path}/SourceSansPro.ttf",
-      :italic => "#{fonts_path}/SourceSansPro-It.ttf",
-      :bold => "#{fonts_path}/SourceSansPro-Semibold.ttf",
+      :normal      => "#{fonts_path}/SourceSansPro.ttf",
+      :italic      => "#{fonts_path}/SourceSansPro-It.ttf",
+      :bold        => "#{fonts_path}/SourceSansPro-Semibold.ttf",
       :bold_italic => "#{fonts_path}/SourceSansPro-SemiboldIt.ttf"
     }
 
