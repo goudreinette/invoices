@@ -9,8 +9,8 @@ class Invoice
 
   def initialize(client)
     now        = Time.now
-    @no        = "##{now.year}#{now.month}#{now.day}"
-    @date      = now
+    @no        = "##{now.year}#{now.strftime("%m")}#{now.strftime("%d")}"
+    @date      = "#{now.strftime("%d")}-#{now.strftime("%m")}-#{now.year}"
     @client    = client
     @reference = '-'
     @items     = {}
@@ -29,15 +29,6 @@ class Invoice
       value
     else
       instance_variable_get "@#{method}"
-    end
-  end
-
-  def date(date = nil)
-    if date
-      @date = date
-      date
-    else
-      "#{@date.day}-#{@date.month}-#{@date.year}"
     end
   end
 
