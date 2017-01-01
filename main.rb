@@ -8,5 +8,4 @@ Invoice.new_for_client 'Hans van der Woerd' do
   city     "Zwolle"
   items    'Add To Cart' => 150,
            'WooEvents'   => 450
-  p self
 end.to_pdf
